@@ -1,4 +1,4 @@
-﻿namespace UniqueCodeCreator
+﻿namespace UniqueCodeCreator.Helpers
 {
     public static class CodeGenerator
     {

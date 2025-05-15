@@ -1,3 +1,6 @@
+using UniqueCodeCreator.Helpers;
+using Loc = UniqueCodeCreator.Localization.Localization;
+
 namespace UniqueCodeCreator
 {
     public partial class FormMain : Form
@@ -25,14 +28,14 @@ namespace UniqueCodeCreator
         {
             if (string.IsNullOrEmpty(textBoxResult.Text))
             {
-                MessageBox.Show("No codes to copy.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Loc.errorCopy, Loc.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             Clipboard.SetText(textBoxResult.Text);
 
             string originalText = buttonCopy.Text;
-            buttonCopy.Text = "Copied!";
+            buttonCopy.Text = Loc.buttonCopy_Copied;
 
             await Task.Delay(2000);
 
@@ -43,21 +46,21 @@ namespace UniqueCodeCreator
         {
             if (string.IsNullOrEmpty(textBoxResult.Text))
             {
-                MessageBox.Show("No codes to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Loc.errorSaveFile, Loc.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             FileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "Text Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv|All Files (*.*)|*.*",
-                Title = "Save Codes",
+                Title = Loc.buttonSaveFile,
                 FileName = $"UniqueCodes_{DateTime.Now:yyyyMMdd_HHmmss}.txt"
             };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 File.WriteAllText(saveFileDialog.FileName, textBoxResult.Text);
-                MessageBox.Show("Codes saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Loc.successSaveFile, Loc.success, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
